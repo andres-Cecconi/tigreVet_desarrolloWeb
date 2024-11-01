@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --body-bg-color: #22212C;
+    --text-color: #837E9F;
+    --bg-cards: #302F3D;
+    --bg-techs: #CB92B1;
+    --bg-techs-hover: #B3B3B3;
+}
+
+body {
+    background-color: var(--body-bg-color); 
+    color: var(--text-color);
+}
