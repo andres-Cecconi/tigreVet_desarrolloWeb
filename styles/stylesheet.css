@@ -33,6 +33,10 @@ p {
     font-family: 'TT Norms Pro Regular';
 }
 
+a {
+    text-decoration: none;
+}
+
 .feather-bold {
     font-family: 'Feather Bold';
 }
@@ -41,10 +45,21 @@ p {
     font-family: 'TT Norms Pro Regular';
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .h1 {
     font-size: 3rem;
 }
 
+.bg-tertiary {
+    background-color: var(--tertiary);
+}
+
+.bg-quaternary {
+    background-color: var(--quaternary);
+}
 
 /* HEADER */
 .navbar {
@@ -55,45 +70,55 @@ p {
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
     max-width: 89%;
 }
+
 .navbar li a {
     font-family: 'TT Norms Pro Regular';
 }
+
 .navbar-nav .nav-link.active {
     color: var(--secondary) !important;
 }
+
 .navbar-nav .nav-link.active:hover {
     color: var(--secondary) !important;
 }
+
 .logo-tigervet {
     max-width: 8rem;
     height: auto;
 }
+
 .logo-tigervet:hover {
     transform: scale(1.1);
     transition: 0.5s;
 }
+
 .nav-link {
     color: var(--primary) !important;
     font-size: 1.2rem !important;
 }
+
 .nav-link:hover {
     color: var(--secondary) !important;
 }
+
 .btn {
     border-radius: 20px;
 }
+
 .btn-tigrevet {
     background-color: var(--primary);
     color: var(--white);
     border: none;
     font-size: 1.2rem;
     transition: 0.5s;
+    margin-bottom: 1em;
 }
+
 .btn-tigrevet:hover {
     background-color: var(--quinary);
     border: solid 1px var(--secondary);
     color: var(--secondary);
-    transition: 0.5s;
 }
 
 @media (max-width: 1000px) {
@@ -109,4 +134,54 @@ p {
 
 
 
-/* FOOTER */
+/* PORTADA */
+@media (max-width: 750px) {
+    .portada h1 {
+        font-size: 1.5rem;
+    }
+
+    .ocultar-en-movil {
+        display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .portada {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+
+
+
+
+/* CARDS SOBRE NOSOTROS */
+.sobre-nosotros {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+@media (max-width: 976px) {
+    .card-compromiso {
+        width: 18rem !important;
+        padding: 1.3em !important;
+    }
+}
+
+@media (min-width : 1180px) {
+    .card-nosotros {
+        width: 30rem !important;
+        height: 33rem !important;
+    }
+    .card-compromiso {
+        width: 30rem !important;
+        height: 33rem !important;
+    }
+}
