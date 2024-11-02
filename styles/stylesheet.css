@@ -1,18 +1,112 @@
+@import url(https://db.onlinewebfonts.com/c/14936bb7a4b6575fd2eee80a3ab52cc2?family=Feather+Bold);
+
+@import url(https://db.onlinewebfonts.com/c/49bf5d043a27b890a040cf393277e2b2?family=TT+Norms+Pro+Regular);
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* GENERALES */
 :root {
-    --body-bg-color: #22212C;
-    --text-color: #837E9F;
-    --bg-cards: #302F3D;
-    --bg-techs: #CB92B1;
-    --bg-techs-hover: #B3B3B3;
+    --primary: rgb(63, 144, 75);
+    --secondary: rgb(255, 148, 19);
+    --tertiary: rgb(205, 224, 205);
+    --quaternary: rgb(245, 209, 221);
+    --quinary: rgba(255, 148, 19, 0.2);
+    --white: #fefdfd;
+    --black: #000000;
 }
 
-body {
-    background-color: var(--body-bg-color); 
-    color: var(--text-color);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+    font-family: 'Feather Bold';
 }
+
+p {
+    font-family: 'TT Norms Pro Regular';
+}
+
+.feather-bold {
+    font-family: 'Feather Bold';
+}
+
+.tt-norms-pro {
+    font-family: 'TT Norms Pro Regular';
+}
+
+.h1 {
+    font-size: 3rem;
+}
+
+
+/* HEADER */
+.navbar {
+    margin: 1em auto;
+    margin-top: 2em !important;
+    background-color: transparent !important;
+    border-radius: 35px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    max-width: 89%;
+}
+.navbar li a {
+    font-family: 'TT Norms Pro Regular';
+}
+.navbar-nav .nav-link.active {
+    color: var(--secondary) !important;
+}
+.navbar-nav .nav-link.active:hover {
+    color: var(--secondary) !important;
+}
+.logo-tigervet {
+    max-width: 8rem;
+    height: auto;
+}
+.logo-tigervet:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+.nav-link {
+    color: var(--primary) !important;
+    font-size: 1.2rem !important;
+}
+.nav-link:hover {
+    color: var(--secondary) !important;
+}
+.btn {
+    border-radius: 20px;
+}
+.btn-tigrevet {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    font-size: 1.2rem;
+    transition: 0.5s;
+}
+.btn-tigrevet:hover {
+    background-color: var(--quinary);
+    border: solid 1px var(--secondary);
+    color: var(--secondary);
+    transition: 0.5s;
+}
+
+@media (max-width: 1000px) {
+    .navbar {
+        max-width: 95%;
+    }
+}
+
+
+
+
+
+
+
+
+/* FOOTER */
