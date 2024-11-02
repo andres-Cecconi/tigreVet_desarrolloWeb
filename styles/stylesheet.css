@@ -348,12 +348,12 @@ a {
 
     .cirugia {
         grid-area: cirugia;
-        width: 25rem!important;
+        width: 25rem !important;
     }
 
     .clinica {
         grid-area: clinica;
-        width: 25rem!important;
+        width: 25rem !important;
     }
 
     .bottom {
@@ -371,16 +371,74 @@ a {
 
     .castracion {
         grid-area: castracion;
-        width: 25rem!important;
+        width: 25rem !important;
     }
 
     .guarderia {
         grid-area: guarderia;
-        width: 25rem!important;
+        width: 25rem !important;
     }
 
     .conocenos {
         grid-area: conocenos;
-        width: 25rem!important;
+        width: 25rem !important;
+    }
+}
+
+
+/* NUESTRO EQUIPO */
+.card {
+    border: none!important;
+}
+.profesionales-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2em 1em;
+    grid-auto-flow: row;
+    justify-content: center;
+    grid-template-areas:
+        "vet-1 vet-2"
+        "vet-3 vet-4";
+}
+
+.profesionales-container img {
+    max-width: 10rem;
+    height: auto;
+}
+
+.vet-1 {
+    grid-area: vet-1;
+}
+
+.vet-2 {
+    grid-area: vet-2;
+}
+
+.vet-3 {
+    grid-area: vet-3;
+}
+
+.vet-4 {
+    grid-area: vet-4;
+}   
+
+@media (max-width: 860px) {
+    .titulo-profesionales {
+        display: flex;
+        flex-direction: column;
+    }
+    .profesionales-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        gap: 2em 1em;
+        grid-auto-flow: row;
+        justify-content: center;
+        grid-template-areas:
+            "vet-1"
+            "vet-2"
+            "vet-3"
+            "vet-4";
     }
 }
