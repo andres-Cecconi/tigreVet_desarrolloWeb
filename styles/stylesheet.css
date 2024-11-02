@@ -17,6 +17,7 @@
     --quinary: rgba(255, 148, 19, 0.2);
     --white: #fefdfd;
     --black: #000000;
+    --light-green: rgba(63, 144, 75, 0.456);
 }
 
 h1,
@@ -51,6 +52,10 @@ a {
 
 .h1 {
     font-size: 3rem;
+}
+
+.bg-primary {
+    background-color: var(--primary) !important;
 }
 
 .bg-tertiary {
@@ -180,8 +185,202 @@ a {
         width: 30rem !important;
         height: 33rem !important;
     }
+
     .card-compromiso {
         width: 30rem !important;
         height: 33rem !important;
+    }
+}
+
+
+
+/* NUESTRO SERVICIOS */
+/* grid */
+.servicios-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "top top top"
+        "bottom bottom bottom";
+}
+
+.top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "cirugia cirugia clinica clinica";
+    grid-area: top;
+}
+
+.cirugia {
+    grid-area: cirugia;
+}
+
+.clinica {
+    grid-area: clinica;
+}
+
+.bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "castracion guarderia conocenos";
+    grid-area: bottom;
+}
+
+.castracion {
+    grid-area: castracion;
+}
+
+.guarderia {
+    grid-area: guarderia;
+}
+
+.conocenos {
+    grid-area: conocenos;
+}
+
+.btn-tigrevet-2 {
+    background-color: var(--secondary);
+    color: var(--white);
+    border: none;
+    font-size: 1.2rem;
+    transition: 0.5s;
+    margin-bottom: 1em;
+}
+
+.btn-tigrevet-2:hover {
+    background-color: var(--light-green);
+    border: solid 1px var(--primary);
+    color: var(--white);
+}
+
+@media (max-width: 770px) {
+    .servicios-card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 0.5fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "top top"
+            "bottom bottom";
+    }
+
+    .top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "cirugia clinica";
+        grid-area: top;
+    }
+
+    .cirugia {
+        grid-area: cirugia;
+    }
+
+    .clinica {
+        grid-area: clinica;
+    }
+
+    .bottom {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1.1fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "castracion guarderia"
+            "conocenos conocenos";
+        grid-area: bottom;
+    }
+
+    .castracion {
+        grid-area: castracion;
+    }
+
+    .guarderia {
+        grid-area: guarderia;
+    }
+
+    .conocenos {
+        grid-area: conocenos;
+    }
+
+}
+
+@media (max-width: 690px) {
+    .servicios-card-container {
+        display: grid;
+        grid-template-columns: 0.5fr;
+        grid-template-rows: 0.8fr 1.1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        justify-content: center;
+        grid-template-areas:
+            "top"
+            "bottom";
+    }
+
+    .top {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "cirugia"
+            "clinica";
+        grid-area: top;
+    }
+
+    .cirugia {
+        grid-area: cirugia;
+        width: 25rem!important;
+    }
+
+    .clinica {
+        grid-area: clinica;
+        width: 25rem!important;
+    }
+
+    .bottom {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1.1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "castracion"
+            "guarderia"
+            "conocenos";
+        grid-area: bottom;
+    }
+
+    .castracion {
+        grid-area: castracion;
+        width: 25rem!important;
+    }
+
+    .guarderia {
+        grid-area: guarderia;
+        width: 25rem!important;
+    }
+
+    .conocenos {
+        grid-area: conocenos;
+        width: 25rem!important;
     }
 }
