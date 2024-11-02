@@ -387,7 +387,7 @@ a {
 
 
 /* NUESTRO EQUIPO */
-.card {
+.card-equipo {
     border: none!important;
 }
 .profesionales-container {
@@ -440,5 +440,35 @@ a {
             "vet-2"
             "vet-3"
             "vet-4";
+    }
+}
+
+
+/* COMENTARIOS */
+.perfil-comentarios  img {
+    width: 3rem;
+    height: auto;
+    border-radius: 50%;
+}
+
+
+
+
+/* FUNACION SILVESTRE */
+@media (max-width: 750px) {
+    .fundacion-silvestre {
+        display: flex;
+        flex-direction: column;
+    }
+    .fundacion-silvestre img {
+        width: 10rem!important;
+        height: auto;
+    }
+}
+
+@media (min-width: 1080px) {
+    .fundacion-silvestre img {
+        width: 15rem!important;
+        height: auto;
     }
 }
