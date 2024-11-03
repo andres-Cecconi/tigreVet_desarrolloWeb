@@ -490,10 +490,19 @@ a {
     outline: none;
 }
 
+input, textarea {
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid var(--white)!important;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background-color: var(--quaternary)!important;
+}
+
 .btn-contacto {
     background-color: black;
     color: white;
-    border-radius: 30px;
+    border-radius: 15px;
     padding: 0.6rem 1.2rem;
     width: 100%;
 }
@@ -501,7 +510,6 @@ a {
 .btn-contacto:hover {
     background-color: #f8d7da;
     color: black;
-    border-radius: 30px;
     padding: 0.6rem 1.2rem;
     width: 100%;
     border: 2px solid black;
@@ -509,7 +517,7 @@ a {
 
 .img-contact-section img {
     border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-bottom-right-radius: 15px; 
     object-fit: cover;
     height: 100%;
     width: 100%;
