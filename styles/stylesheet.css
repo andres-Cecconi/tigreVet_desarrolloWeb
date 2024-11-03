@@ -528,3 +528,44 @@ input, textarea {
         display: none;
     }
 }
+
+
+
+
+
+/* PAGINA SERVICIOS */
+.card-nav {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.card-nav:hover .card , 
+.card-nav.active .card{
+    background-color: var(--primary) !important;
+    transform: scale(1.1);
+    color: var(--white);
+}
+
+.card-nav:hover p,
+.card-nav.active p {
+    color: var(--white);
+}
+.card-servicios{
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.card-servicios img {
+    width: 5rem;
+    height: 7rem;
+}
+
+.content-item {
+    display: none;
+    font-size: 1.1rem;
+    color: var(--black);
+}
+
+.content-item.active {
+    display: block;
+}

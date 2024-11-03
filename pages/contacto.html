@@ -53,34 +53,38 @@
     </header>
 
     <!-- MAIN -->
-    <div class="container mt-5 bg-quaternary rounded-4">
-        <div class="row align-items-center rounded-4 shadow-lg overflow-hidden" >
-            <!-- Sección Izquierda (Formulario) -->
-            <div class="col-md-6 p-5 left-section d-flex flex-column justify-content-center">
-                <div class="contact-form text-center">
-                    <h1 class="bold">Hola!</h1>
-                    <p>Dejanos tu mensaje y nos contactaremos en breve</p>
-                    <!-- aca se puede configurar el formulario con formspree mediante el action -->
-                    <form action="https://formspree.io/f/{tu_form_id}" method="POST">
-                        <div class="mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <textarea name="mensaje" class="form-control" rows="3" placeholder="Mensaje" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-contacto">Enviar mensaje</button>
-                    </form>
+    <main>
+        <div class="container mt-5 bg-quaternary rounded-4">
+            <div class="row align-items-center rounded-4 shadow-lg overflow-hidden">
+                <!-- Sección Izquierda (Formulario) -->
+                <div class="col-md-6 p-5 left-section d-flex flex-column justify-content-center">
+                    <div class="contact-form text-center">
+                        <h1 class="bold">Hola!</h1>
+                        <p>Dejanos tu mensaje y nos contactaremos en breve</p>
+                        <!-- aca se puede configurar el formulario con formspree mediante el action -->
+                        <form action="https://formspree.io/f/{tu_form_id}" method="POST">
+                            <div class="mb-3">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="mensaje" class="form-control" rows="3" placeholder="Mensaje"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-contacto">Enviar mensaje</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Sección Derecha (Imagen) -->
+                <div class="col-md-6 p-0 img-contact-section">
+                    <img src="../assets/formulario-contacto.png" alt="Imagen de cachorros">
                 </div>
             </div>
-            <!-- Sección Derecha (Imagen) -->
-            <div class="col-md-6 p-0 img-contact-section">
-                <img src="../assets/formulario-contacto.png" alt="Imagen de cachorros">
-            </div>
         </div>
-    </div>
+    </main>
+
 
 
     <!-- FOOTER -->
