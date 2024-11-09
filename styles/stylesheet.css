@@ -569,3 +569,37 @@ input, textarea {
 .content-item.active {
     display: block;
 }
+
+/* PAGINA PREGUNTAS FRECUENTES */ 
+
+/* Sección FAQ */
+.faq-section .faq-item {
+    margin-bottom: 1rem;
+}
+
+.faq-section .faq-question {
+    background-color: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: left;
+    padding: 1rem 0;
+}
+
+.faq-section .faq-answer {
+    font-size: 1rem;
+    color: var(--black);
+    padding: 1rem;
+    background-color: var(--tertiary);
+    border-radius: 10px;
+}
+
+.faq-section .faq-question:hover {
+    color: var(--secondary);
+}
+
+.faq-section .faq-item .collapse.show {
+    margin-top: 10px;
+}
+
