@@ -1,0 +1,191 @@
+.current-day-header {
+    background-color: #e8f4f8 !important;
+    border-top: 2px solid #007bff !important;
+    border-left: 2px solid #007bff !important;
+    border-right: 2px solid #007bff !important;
+}
+
+.current-day-column {
+    border-left: 2px solid #007bff !important;
+    border-right: 2px solid #007bff !important;
+    background-color: #e8f4f8 !important;
+}
+
+.current-day-column-last {
+    border-bottom: 2px solid #007bff !important;
+}
+
+.professional-title {
+    background-color: #f8f9fa;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.slot-cirugía {
+    background-color: #fff3f3;
+    cursor: pointer;
+}
+
+.slot-clínica-general {
+    background-color: #f3fff3;
+    cursor: pointer;
+}
+
+.slot-castración {
+    background-color: #f3f3ff;
+    cursor: pointer;
+}
+
+.slot-guardería {
+    background-color: #fff9f3;
+    cursor: pointer;
+}
+
+.selected-slot {
+    background-color: #e3f2fd !important;
+    border: 2px solid #1976d2 !important;
+}
+
+td[data-professional]:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.2s;
+}
+
+@media (max-width: 768px) {
+    .professional-title {
+        font-size: 0.9em;
+    }
+    
+    td {
+        padding: 5px !important;
+        font-size: 0.8em;
+    }
+    
+    .appointments-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .appointment-card {
+        font-size: 0.9em;
+    }
+}
+
+.appointed-slot {
+    background-color: #cce5ff !important;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.appointed-slot::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+.appointments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.appointment-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.appointment-card p {
+    margin-bottom: 0.5rem;
+}
+
+.appointment-card button {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.modal-footer {
+    border-top: 2px solid #dee2e6;
+}
+
+#appointmentDetails {
+    font-size: 1.1em;
+    color: #495057;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.calendar-container {
+    margin-top: 20px;
+}
+
+.table td, .table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.calendar-container td {
+    cursor: pointer;
+    height: 50px;
+    transition: background-color 0.2s;
+}
+
+.calendar-container td:hover:not(.appointed-slot) {
+    background-color: #d1e6f3 !important;
+}
+
+.appointments-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.appointments-container h3 {
+    color: #212529;
+    margin-bottom: 1.5rem;
+}
+
+.card {
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: #0d6efd;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.btn-danger {
+    margin-top: 1rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    vertical-align: middle;
+}
