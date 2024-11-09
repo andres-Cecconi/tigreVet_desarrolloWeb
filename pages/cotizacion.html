@@ -55,7 +55,55 @@
     </header>
 
     <!-- MAIN -->
-
+    <main class="container my-5">
+        <h2 class="text-center mb-4">Calculadora de Presupuesto</h2>
+        <form id="cotizacion-form" class="p-4 bg-light rounded">
+            <div class="mb-3">
+                <label for="servicio" class="form-label">Selecciona el servicio:</label>
+                <select class="form-select" id="servicio" required>
+                    <option value="" disabled selected>Elige un servicio</option>
+                    <option value="clinica">Clínica General</option>
+                    <option value="cirugia">Cirugía</option>
+                    <option value="castracion">Castración</option>
+                    <option value="guarderia">Guardería</option>
+                </select>
+            </div>
+    
+            <div class="mb-3">
+                <label for="cantidad" class="form-label">Cantidad de animales:</label>
+                <input type="number" name="cantidad" id="cantidad" placeholder="Número de animales" required min="1">
+            </div>
+    
+            <div class="mb-3">
+                <label for="tamano" class="form-label">Selecciona el tamaño del animal:</label>
+                <select class="form-select" id="tamano" required>
+                    <option value="" disabled selected>Elige el tamaño</option>
+                    <option value="pequeno">Pequeño (menos de 5KG)</option>
+                    <option value="mediano">Mediano (de 5KG a 10KG)</option>
+                    <option value="grande">Grande (más de 10KG)</option>
+                </select>
+            </div>
+    
+            <div class="text-center">
+                <button type="button" class="btn btn-tigrevet mt-3" onclick="agregarAnimal()">Agregar al presupuesto</button>
+            </div>
+    
+            <div id="resumen-cotizacion" class="mt-4 d-none">
+                <h4>Resumen de Cotización</h4>
+                <div id="lista-servicios">
+                    <!-- Aquí se agregarán los animales y servicios seleccionados -->
+                </div>
+    
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-tigrevet mt-3" onclick="calcularPresupuesto()">Calcular Presupuesto Final</button>
+                </div>
+            </div>
+    
+            <div id="resultado" class="alert alert-primary mt-4 d-none" role="alert">
+                <!-- Aquí aparecerá el presupuesto estimado -->
+            </div>
+        </form>
+    </main>
 
     <!-- FOOTER -->
     <footer class="container py-3 mt-auto border-top position-relative">
@@ -103,6 +151,10 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="../main.js"></script>
+
+    <!-- Calculadora de presupuesto -->
+    <script src="../scripts/cotizacion.js"></script>
+
 </body>
 
 </html>
