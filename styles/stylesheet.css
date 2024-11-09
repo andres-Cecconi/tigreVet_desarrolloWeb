@@ -569,3 +569,20 @@ input, textarea {
 .content-item.active {
     display: block;
 }
+
+/* COTIZACION */
+/* Estilo para la entrada de cantidad de animales */
+#cantidad {
+    background-color: white !important;  /* Fondo blanco */
+    color: black !important;             /* Texto negro */
+    border: 1px solid #ccc !important;  /* Borde sutil */
+    padding: 8px !important;             /* Espaciado interno */
+    font-size: 16px !important;          /* Tamaño de la fuente */
+    border-radius: 5px !important;       /* Bordes redondeados */
+}
+
+/* Aseguramos que el input no cambie de color al estar en foco */
+#cantidad:focus {
+    outline: none !important;           /* Eliminar contorno predeterminado */
+    border-color: #007bff !important;   /* Bordes azules al hacer foco */
+}
