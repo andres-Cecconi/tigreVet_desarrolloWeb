@@ -385,6 +385,14 @@ a {
     }
 }
 
+/* SOBRE NOSOTROS */
+.sobre-nosotros-banner {
+    width: 100%!important;
+    height: 300px!important;
+    object-fit: cover;
+    border-radius: 3em;
+}
+
 
 /* NUESTRO EQUIPO */
 .card-equipo {
