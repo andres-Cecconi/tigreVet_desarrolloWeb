@@ -60,21 +60,22 @@
         <form id="cotizacion-form" class="p-4 bg-light rounded">
             <div class="mb-3">
                 <label for="servicio" class="form-label">Selecciona el servicio:</label>
-                <select class="form-select" id="servicio" required onchange="mostrarCalendario()">
+                <select class="form-select" id="servicio" required>
                     <option value="" disabled selected>Elige un servicio</option>
                     <option value="clinica">Clínica General</option>
+                    <option value="cirugia">Cirugía</option>
                     <option value="castracion">Castración</option>
                     <option value="guarderia">Guardería</option>
                 </select>
             </div>
     
             <div class="mb-3">
-                <label for="cantidad" class="form-label">Cantidad de mascotas:</label>
-                <input type="number" name="cantidad" id="cantidad" placeholder="Número de mascotas" required min="1">
+                <label for="cantidad" class="form-label">Cantidad de animales:</label>
+                <input type="number" name="cantidad" id="cantidad" placeholder="Número de animales" required min="1">
             </div>
     
             <div class="mb-3">
-                <label for="tamano" class="form-label">Selecciona el tamaño de la mascota:</label>
+                <label for="tamano" class="form-label">Selecciona el tamaño del animal:</label>
                 <select class="form-select" id="tamano" required>
                     <option value="" disabled selected>Elige el tamaño</option>
                     <option value="pequeno">Pequeño (menos de 5KG)</option>
@@ -83,21 +84,14 @@
                 </select>
             </div>
     
-            <!-- Campo de selección de días solo visible para Guardería -->
-            <div class="mb-3 d-none" id="dias-guarderia">
-                <label for="dias" class="form-label">Selecciona los días de estadía:</label>
-                <input type="date" id="fecha-inicio" class="form-control mb-2" placeholder="Fecha de inicio">
-                <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha de fin">
-            </div>
-    
             <div class="text-center">
-                <button type="button" class="btn btn-tigrevet mt-3" onclick="agregarMascota()">Agregar al presupuesto</button>
+                <button type="button" class="btn btn-tigrevet mt-3" onclick="agregarAnimal()">Agregar al presupuesto</button>
             </div>
     
             <div id="resumen-cotizacion" class="mt-4 d-none">
                 <h4>Resumen de Cotización</h4>
                 <div id="lista-servicios">
-                    <!-- Aquí se agregarán las mascotas y servicios seleccionados -->
+                    <!-- Aquí se agregarán los animales y servicios seleccionados -->
                 </div>
     
                 <div class="text-center mt-4">
