@@ -1,6 +1,12 @@
-// Configuración
+const currentDate = new Date();
+let currentMonday = new Date(currentDate);
+let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+const diff = currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1;
+currentMonday.setDate(currentDate.getDate() - diff);
+
+// Configuración de horarios para servicios profesionales
 const professionalSchedules = {
-    'Cirugía': {
+    Cirugía: {
         startHour: 8,
         endHour: 14,
     },
@@ -8,21 +14,15 @@ const professionalSchedules = {
         startHour: 7,
         endHour: 19,
     },
-    'Castración': {
+    Castración: {
         startHour: 9,
         endHour: 15,
     },
-    'Guardería': {
+    Guardería: {
         startHour: 7,
         endHour: 20,
-    }
+    },
 };
-
-// Variables globales
-const currentDate = new Date();
-let currentMonday = new Date(currentDate);
-currentMonday.setDate(currentDate.getDate() - currentDate.getDay() + 1);
-let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 
 // Funciones de utilidad
 function isPastDate(dateStr) {
@@ -36,40 +36,68 @@ function isPastDate(dateStr) {
     return checkDate < today;
 }
 
+function isPastTime(dateStr, hour) {
+    const now = new Date();
+    const [year, month, day] = dateStr.split('-').map(Number);
+    const checkDate = new Date(year, month - 1, day);
+    if (isPastDate(dateStr)) {
+        return true;
+    }
+    if (
+        checkDate.getDate() === now.getDate() &&
+        checkDate.getMonth() === now.getMonth() &&
+        checkDate.getFullYear() === now.getFullYear()
+    ) {
+        return hour <= now.getHours();
+    }
+
+    return false;
+}
+
 function formatDate(date) {
-    return date.toLocaleDateString("es-ES", { 
-        day: "numeric", 
-        month: "numeric",
-        timeZone: 'UTC'
+    return date.toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'numeric',
+        timeZone: 'UTC',
     });
 }
 
 function formatFullDate(date) {
+    if (typeof date === 'string') {
+        const [year, month, day] = date.split('-').map(Number);
+        date = new Date(year, month - 1, day);
+    }
+
     return date.toLocaleDateString('es-ES', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        timeZone: 'UTC'
     });
 }
 
 // Funciones del calendario
 function generateCalendarHeader() {
-    const calendarHeader = document.getElementById("calendar-header");
-    calendarHeader.innerHTML = "<th>Hora</th>";
-    const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+    const calendarHeader = document.getElementById('calendar-header');
+    calendarHeader.innerHTML = '<th>Hora</th>';
+    const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
     for (let i = 0; i < 7; i++) {
         const day = new Date(currentMonday);
         day.setDate(currentMonday.getDate() + i);
         const dayName = daysOfWeek[i];
         const formattedDate = formatDate(day);
-        const headerCell = document.createElement("th");
+        const headerCell = document.createElement('th');
         headerCell.innerText = `${dayName} ${formattedDate}`;
 
-        if (day.toDateString() === new Date().toDateString()) {
-            headerCell.classList.add("current-day-header");
+        // Verificar si es el día actual
+        const today = new Date();
+        if (
+            day.getDate() === today.getDate() &&
+            day.getMonth() === today.getMonth() &&
+            day.getFullYear() === today.getFullYear()
+        ) {
+            headerCell.classList.add('current-day-header');
         }
         calendarHeader.appendChild(headerCell);
     }
@@ -77,55 +105,59 @@ function generateCalendarHeader() {
 
 function generateCalendar(professional = 'Clínica General') {
     generateCalendarHeader();
-    const calendarBody = document.getElementById("calendar-body");
-    calendarBody.innerHTML = "";
+    const calendarBody = document.getElementById('calendar-body');
+    calendarBody.innerHTML = '';
 
     const schedule = professionalSchedules[professional];
     const startHour = schedule.startHour;
     const endHour = schedule.endHour;
 
     for (let hour = startHour; hour < endHour; hour++) {
-        const row = document.createElement("tr");
-        
-        const timeCell = document.createElement("td");
+        const row = document.createElement('tr');
+
+        const timeCell = document.createElement('td');
         timeCell.innerText = `${hour}:00 - ${hour + 1}:00`;
         row.appendChild(timeCell);
 
         for (let i = 0; i < 7; i++) {
-            const cell = document.createElement("td");
+            const cell = document.createElement('td');
             const day = new Date(currentMonday);
             day.setDate(currentMonday.getDate() + i);
-            
-            const localDate = new Date(Date.UTC(
-                day.getFullYear(),
-                day.getMonth(),
-                day.getDate(),
-                12
-            ));
-            
-            const dateStr = localDate.toISOString().split('T')[0];
-            
-            // Solo aplicar estilo y bloqueo a fechas anteriores a hoy
-            if (isPastDate(dateStr)) {
+
+            const year = day.getFullYear();
+            const month = String(day.getMonth() + 1).padStart(2, '0');
+            const dayOfMonth = String(day.getDate()).padStart(2, '0');
+            const dateStr = `${year}-${month}-${dayOfMonth}`;
+
+            cell.setAttribute('data-date', dateStr);
+            cell.setAttribute('data-hour', hour);
+            cell.setAttribute('data-professional', professional);
+
+            const isPast = isPastDate(dateStr);
+            const isPastTimeSlot = isPastTime(dateStr, hour);
+
+            if (isPast || isPastTimeSlot) {
                 cell.classList.add('past-date');
                 cell.style.backgroundColor = '#f5f5f5';
                 cell.style.cursor = 'not-allowed';
-                cell.title = 'No se pueden agendar citas en fechas pasadas';
-            }
-            
-            if (day.toDateString() === new Date().toDateString()) {
-                cell.classList.add("current-day-column");
-            }
-
-            cell.setAttribute("data-date", dateStr);
-            cell.setAttribute("data-hour", hour);
-            cell.setAttribute("data-professional", professional);
-            
-            // Permitir click en el día actual y fechas futuras
-            if (!isPastDate(dateStr)) {
+                cell.title = isPast
+                    ? 'No se pueden agendar citas en fechas pasadas'
+                    : 'No se pueden agendar citas en horarios pasados';
+            } else {
+                cell.style.cursor = 'pointer';
                 cell.onclick = () => handleSlotClick(cell);
             }
-            
+
+            // Marcar el día actual
+            const today = new Date();
+            if (
+                day.getDate() === today.getDate() &&
+                day.getMonth() === today.getMonth() &&
+                day.getFullYear() === today.getFullYear()
+            ) {
+                cell.classList.add('current-day-column');
+            }
+
             row.appendChild(cell);
         }
         calendarBody.appendChild(row);
@@ -136,11 +168,11 @@ function generateCalendar(professional = 'Clínica General') {
 }
 
 function updateCalendarWithAppointments() {
-    document.querySelectorAll('.appointed-slot').forEach(slot => {
+    document.querySelectorAll('.appointed-slot').forEach((slot) => {
         slot.classList.remove('appointed-slot');
     });
 
-    appointments.forEach(appointment => {
+    appointments.forEach((appointment) => {
         const slot = document.querySelector(
             `td[data-date="${appointment.date}"][data-hour="${appointment.hour}"][data-professional="${appointment.professional}"]`
         );
@@ -153,21 +185,17 @@ function updateCalendarWithAppointments() {
 
 function handleSlotClick(cell) {
     const dateStr = cell.getAttribute('data-date');
-    
-    if (isPastDate(dateStr)) {
-        showErrorAlert('No se pueden agendar citas en fechas pasadas');
+    const hour = parseInt(cell.getAttribute('data-hour'));
+
+    if (isPastTime(dateStr, hour)) {
+        showErrorAlert('No se pueden agendar citas en horarios pasados');
         return;
     }
-    
-    const [year, month, day] = dateStr.split('-').map(Number);
-    const date = new Date(Date.UTC(year, month - 1, day, 12));
-    const hour = parseInt(cell.getAttribute('data-hour'));
+
     const professional = cell.getAttribute('data-professional');
 
-    const existingAppointment = appointments.find(app => 
-        app.date === dateStr && 
-        parseInt(app.hour) === hour && 
-        app.professional === professional
+    const existingAppointment = appointments.find(
+        (app) => app.date === dateStr && parseInt(app.hour) === hour && app.professional === professional
     );
 
     if (existingAppointment) {
@@ -175,10 +203,13 @@ function handleSlotClick(cell) {
         return;
     }
 
+    // Crear fecha para mostrar en el modal
+    const [year, month, day] = dateStr.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
     const formattedDate = formatFullDate(date);
+
     showAppointmentModal(professional, formattedDate, hour, cell);
 }
-
 
 function showAppointmentModal(professional, formattedDate, hour, cell) {
     const appointmentModal = document.getElementById('appointmentModal');
@@ -212,7 +243,7 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
                 text: 'Por favor, completa todos los campos requeridos',
                 icon: 'warning',
                 confirmButtonColor: '#0d6efd',
-                confirmButtonText: 'Entendido'
+                confirmButtonText: 'Entendido',
             });
             return;
         }
@@ -224,16 +255,14 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
                 text: 'Por favor, ingresa un número de 10 dígitos sin espacios ni guiones',
                 icon: 'error',
                 confirmButtonColor: '#0d6efd',
-                confirmButtonText: 'Corregir'
+                confirmButtonText: 'Corregir',
             });
             return;
         }
 
         const dateStr = cell.getAttribute('data-date');
-        const existingAppointment = appointments.find(app => 
-            app.date === dateStr && 
-            parseInt(app.hour) === hour && 
-            app.professional === professional
+        const existingAppointment = appointments.find(
+            (app) => app.date === dateStr && parseInt(app.hour) === hour && app.professional === professional
         );
 
         if (existingAppointment) {
@@ -242,7 +271,7 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
                 text: 'Este horario ya está reservado',
                 icon: 'error',
                 confirmButtonColor: '#0d6efd',
-                confirmButtonText: 'Entendido'
+                confirmButtonText: 'Entendido',
             });
             return;
         }
@@ -253,7 +282,7 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
             html: `
                 <p>¿Deseas confirmar el turno con los siguientes datos?</p>
                 <ul style="text-align: left; list-style: none;">
-                    <li><strong>Profesional:</strong> ${professional}</li>
+                    <li><strong>Servicio:</strong> ${professional}</li>
                     <li><strong>Fecha:</strong> ${formattedDate}</li>
                     <li><strong>Hora:</strong> ${hour}:00 hs</li>
                     <li><strong>Paciente:</strong> ${nombreApellido}</li>
@@ -265,7 +294,7 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
             confirmButtonColor: '#0d6efd',
             cancelButtonColor: '#6c757d',
             confirmButtonText: 'Sí, confirmar',
-            cancelButtonText: 'Cancelar'
+            cancelButtonText: 'Cancelar',
         });
 
         if (confirmResult.isConfirmed) {
@@ -276,7 +305,7 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
                 hour,
                 patientName: nombreApellido,
                 contactNumber: numeroContacto,
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
             };
 
             appointments.push(newAppointment);
@@ -284,15 +313,15 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
 
             updateCalendarWithAppointments();
             updateAppointmentsList();
-            
+
             bootstrap.Modal.getInstance(appointmentModal).hide();
-            
+
             await Swal.fire({
                 title: '¡Turno confirmado!',
                 text: 'Tu turno ha sido agendado exitosamente',
                 icon: 'success',
                 confirmButtonColor: '#0d6efd',
-                confirmButtonText: 'Excelente'
+                confirmButtonText: 'Excelente',
             });
         }
     });
@@ -301,11 +330,11 @@ function showAppointmentModal(professional, formattedDate, hour, cell) {
 }
 function updateAppointmentsList() {
     const appointmentsContainer = document.getElementById('appointments-list');
-    
+
     // Ordenar todos los turnos por fecha y hora
     const sortedAppointments = appointments.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
+        const dateA = new Date(a.date + 'T00:00:00');
+        const dateB = new Date(b.date + 'T00:00:00');
         if (dateA - dateB === 0) {
             return parseInt(a.hour) - parseInt(b.hour);
         }
@@ -322,7 +351,7 @@ function updateAppointmentsList() {
     }, {});
 
     let html = '<h3 class="mb-4">Todos los Turnos Agendados</h3>';
-    
+
     if (sortedAppointments.length === 0) {
         html += '<p class="text-muted">No hay turnos agendados</p>';
     } else {
@@ -334,29 +363,41 @@ function updateAppointmentsList() {
                     <div class="row">
             `;
 
-            profAppointments.forEach(appointment => {
-                const appointmentDate = new Date(appointment.date);
+            profAppointments.forEach((appointment) => {
+                const [year, month, day] = appointment.date.split('-').map(Number);
+                const appointmentDate = new Date(year, month - 1, day);
                 const isPastAppointment = isPastDate(appointment.date);
-                
+
+                const formattedDate = appointmentDate.toLocaleDateString('es-ES', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+
                 html += `
                     <div class="col-md-4 mb-3">
                         <div class="card ${isPastAppointment ? 'past-appointment' : ''}">
                             <div class="card-body">
-                                <h5 class="card-title">${formatFullDate(appointmentDate)}</h5>
+                                <h5 class="card-title">${formattedDate}</h5>
                                 <p class="card-text">
                                     <strong>Hora:</strong> ${appointment.hour}:00 hs<br>
                                     <strong>Paciente:</strong> ${appointment.patientName}<br>
                                     <strong>Contacto:</strong> ${appointment.contactNumber}
                                 </p>
-                                ${!isPastAppointment ? `
+                                ${
+                                    !isPastAppointment
+                                        ? `
                                     <button onclick="cancelAppointment(${appointment.id})" class="btn btn-danger btn-sm">
                                         Cancelar Turno
                                     </button>
-                                ` : `
+                                `
+                                        : `
                                     <div class="text-muted font-italic">
                                         <small>Turno pasado</small>
                                     </div>
-                                `}
+                                `
+                                }
                             </div>
                         </div>
                     </div>
@@ -382,17 +423,18 @@ function nextWeek() {
 function previousWeek() {
     const newDate = new Date(currentMonday);
     newDate.setDate(currentMonday.getDate() - 7);
-    
+
     const today = new Date();
     const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - today.getDay() + 1);
+    const todayDiff = today.getDay() === 0 ? 6 : today.getDay() - 1;
+    startOfWeek.setDate(today.getDate() - todayDiff);
     startOfWeek.setHours(0, 0, 0, 0);
-    
+
     if (newDate < startOfWeek) {
         showErrorAlert('No se puede navegar a semanas anteriores a la actual');
         return;
     }
-    
+
     currentMonday = newDate;
     const professional = document.getElementById('profesional').value;
     generateCalendar(professional);
@@ -400,7 +442,8 @@ function previousWeek() {
 
 function currentWeek() {
     const today = new Date();
-    currentMonday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
+    const diff = today.getDay() === 0 ? 6 : today.getDay() - 1;
+    currentMonday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - diff);
     const professional = document.getElementById('profesional').value;
     generateCalendar(professional);
 }
@@ -412,16 +455,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remover event listeners anteriores
         const newSelect = professionalSelect.cloneNode(true);
         professionalSelect.parentNode.replaceChild(newSelect, professionalSelect);
-        
+
         // Agregar nuevo event listener
         newSelect.addEventListener('change', (e) => {
             generateCalendar(e.target.value);
         });
-        
+
         generateCalendar(newSelect.value);
     }
 });
-
 
 // Función para cancelar turnos
 async function cancelAppointment(appointmentId) {
@@ -430,15 +472,15 @@ async function cancelAppointment(appointmentId) {
         text: '¿Deseas cancelar este turno?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#6c757d', // Color gris para "Cancelar operación"
-        cancelButtonColor: '#dc3545', // Color rojo para "Sí, cancelar turno"
+        confirmButtonColor: '#6c757d',
+        cancelButtonColor: '#dc3545',
         confirmButtonText: 'No, mantener turno',
         cancelButtonText: 'Sí, cancelar turno',
-        reverseButtons: true // Esto invierte el orden de los botones
+        reverseButtons: true,
     });
-    
-    if (!confirmed.isConfirmed) { // Cambiamos la lógica porque invertimos los botones
-        const index = appointments.findIndex(app => app.id === appointmentId);
+
+    if (!confirmed.isConfirmed) {
+        const index = appointments.findIndex((app) => app.id === appointmentId);
         if (index !== -1) {
             appointments.splice(index, 1);
             localStorage.setItem('appointments', JSON.stringify(appointments));
@@ -449,7 +491,7 @@ async function cancelAppointment(appointmentId) {
                 text: 'El turno ha sido cancelado exitosamente',
                 icon: 'success',
                 confirmButtonColor: '#0d6efd',
-                confirmButtonText: 'Entendido'
+                confirmButtonText: 'Entendido',
             });
         }
     }
@@ -462,7 +504,7 @@ async function showSuccessAlert(message) {
         text: message,
         icon: 'success',
         confirmButtonColor: '#0d6efd',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
     });
 }
 
@@ -473,7 +515,7 @@ async function showErrorAlert(message) {
         text: message,
         icon: 'error',
         confirmButtonColor: '#dc3545',
-        confirmButtonText: 'Entendido'
+        confirmButtonText: 'Entendido',
     });
 }
 
@@ -487,7 +529,7 @@ async function showConfirmation(message) {
         confirmButtonColor: '#dc3545',
         cancelButtonColor: '#6c757d',
         confirmButtonText: 'Sí, confirmar',
-        cancelButtonText: 'Cancelar'
+        cancelButtonText: 'Cancelar',
     });
     return result.isConfirmed;
 }
