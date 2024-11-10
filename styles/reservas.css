@@ -1,137 +1,32 @@
+@import url('stylesheets.css');
+
+/* Estilos del calendario */
 .current-day-header {
-    background-color: #e8f4f8 !important;
-    border-top: 2px solid #007bff !important;
-    border-left: 2px solid #007bff !important;
-    border-right: 2px solid #007bff !important;
+    background-color: var(--tertiary) !important;
+    border-top: 2px solid var(--primary) !important;
+    border-left: 2px solid var(--primary) !important;
+    border-right: 2px solid var(--primary) !important;
+    border-bottom: 2px solid var(--primary) !important;
 }
 
 .current-day-column {
-    border-left: 2px solid #007bff !important;
-    border-right: 2px solid #007bff !important;
-    background-color: #e8f4f8 !important;
+    border-left: 2px solid var(--primary) !important;
+    border-right: 2px solid var(--primary) !important;
+    background-color: rgba(205, 224, 205, 0.6) !important;
 }
 
 .current-day-column-last {
-    border-bottom: 2px solid #007bff !important;
+    border-bottom: 2px solid var(--primary) !important;
 }
 
-.professional-title {
-    background-color: #f8f9fa;
-    text-align: center;
-    font-weight: bold;
-    padding: 10px;
-    border-bottom: 2px solid #dee2e6;
-}
-
-.slot-cirugía {
-    background-color: #fff3f3;
-    cursor: pointer;
-}
-
-.slot-clínica-general {
-    background-color: #f3fff3;
-    cursor: pointer;
-}
-
-.slot-castración {
-    background-color: #f3f3ff;
-    cursor: pointer;
-}
-
-.slot-guardería {
-    background-color: #fff9f3;
-    cursor: pointer;
-}
-
-.selected-slot {
-    background-color: #e3f2fd !important;
-    border: 2px solid #1976d2 !important;
-}
-
-td[data-professional]:hover {
-    background-color: #e9ecef;
-    transition: background-color 0.2s;
-}
-
-@media (max-width: 768px) {
-    .professional-title {
-        font-size: 0.9em;
-    }
-    
-    td {
-        padding: 5px !important;
-        font-size: 0.8em;
-    }
-    
-    .appointments-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .appointment-card {
-        font-size: 0.9em;
-    }
-}
-
-.appointed-slot {
-    background-color: #cce5ff !important;
-    cursor: not-allowed;
-    position: relative;
-}
-
-.appointed-slot::after {
-    content: "✓";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #0d6efd;
-    font-weight: bold;
-}
-
-.appointments-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.appointment-card {
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 1rem;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.appointment-card p {
-    margin-bottom: 0.5rem;
-}
-
-.appointment-card button {
-    margin-top: 0.5rem;
-    width: 100%;
-}
-
-.modal-header {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #dee2e6;
-}
-
-.modal-footer {
-    border-top: 2px solid #dee2e6;
-}
-
-#appointmentDetails {
-    font-size: 1.1em;
-    color: #495057;
-    margin-bottom: 1.5rem;
-    padding: 0.5rem;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-}
-
+/* Estilos de la tabla */
 .calendar-container {
     margin-top: 20px;
+    padding: 1em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    border-radius: 35px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 .table td, .table th {
@@ -145,25 +40,147 @@ td[data-professional]:hover {
     transition: background-color 0.2s;
 }
 
-.calendar-container td:hover:not(.appointed-slot) {
-    background-color: #d1e6f3 !important;
+.calendar-container td:hover:not(.appointed-slot):not(.past-date) {
+    background-color: var(--light-green) !important;
 }
 
+.table th {
+    background-color: var(--white);
+    vertical-align: middle;
+}
+
+/* Estilos de los slots */
+.appointed-slot {
+    background-color: var(--light-green) !important;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.appointed-slot::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.past-date {
+    background-color: var(--quinary);
+    cursor: not-allowed;
+    color: var(--secondary);
+}
+
+.past-date:hover {
+    background-color: var(--quinary) !important;
+}
+
+/* Estilos del modal */
+.modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: var(--white);
+    border-bottom: 2px solid var(--tertiary);
+    border-radius: 12px 12px 0 0;
+    padding: 1.5rem;
+}
+
+.modal-title {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.75rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+#appointmentDetails {
+    color: var(--black);
+    background-color: var(--tertiary);
+    border: 1px solid var(--quinary);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.form-label {
+    font-size: 1.25rem !important;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border: 1px solid var(--tertiary);
+    border-radius: 6px;
+    padding: 0.75rem;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(63, 144, 75, 0.25);
+}
+
+.form-text {
+    color: var(--light-green);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.modal-footer {
+    border-top: 2px solid var(--tertiary);
+    border-radius: 0 0 12px 12px;
+    padding: 1.5rem;
+}
+
+.modal-footer .btn {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.modal-footer .btn-secondary {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--white);
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.modal-footer .btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: var(--light-green);
+    border-color: var(--primary);
+}
+
+/* Estilos de las tarjetas de turnos */
 .appointments-container {
     margin-top: 2rem;
     padding: 1rem;
-    background-color: #f8f9fa;
+    background-color: var(--white);
     border-radius: 8px;
-}
-
-.appointments-container h3 {
-    color: #212529;
-    margin-bottom: 1.5rem;
 }
 
 .card {
     transition: transform 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
 }
 
 .card:hover {
@@ -171,7 +188,7 @@ td[data-professional]:hover {
 }
 
 .card-title {
-    color: #0d6efd;
+    color: var(--primary);
     font-size: 1.1rem;
     margin-bottom: 1rem;
 }
@@ -181,11 +198,40 @@ td[data-professional]:hover {
     line-height: 1.6;
 }
 
-.btn-danger {
-    margin-top: 1rem;
+.past-appointment {
+    opacity: 0.7;
+    background-color: var(--white);
 }
 
-.table th {
-    background-color: #f8f9fa;
-    vertical-align: middle;
+.past-appointment .card-title {
+    color: var(--secondary);
+}
+
+input, textarea {
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid var(--secondary)!important;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background-color: var(--white)!important;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    td {
+        padding: 5px !important;
+        font-size: 0.8em;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    .modal-footer {
+        padding: 1rem;
+    }
+    
+    #appointmentDetails {
+        font-size: 1rem;
+    }
 }
