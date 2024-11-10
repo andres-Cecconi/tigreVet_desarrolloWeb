@@ -660,3 +660,13 @@ input, textarea {
     border-color: #007bff !important;   /* Bordes azules al hacer foco */
 }
 
+
+/* PAGINA BLOG */
+.card-link {
+    display: block;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-link:hover {
+    transform: scale(1.05);
+}
