@@ -12,7 +12,15 @@
 .current-day-column {
     border-left: 2px solid var(--primary) !important;
     border-right: 2px solid var(--primary) !important;
+}
+
+.current-day-column:not(.past-date) {
     background-color: rgba(205, 224, 205, 0.6) !important;
+}
+
+.current-day-column.past-date {
+    cursor: not-allowed !important;
+    color: var(--secondary) !important;
 }
 
 .current-day-column-last {
@@ -35,7 +43,6 @@
 }
 
 .calendar-container td {
-    cursor: pointer;
     height: 50px;
     transition: background-color 0.2s;
 }
@@ -47,6 +54,20 @@
 .table th {
     background-color: var(--white);
     vertical-align: middle;
+}
+
+.calendar-container td:first-child {
+    cursor: default !important;
+    background-color: var(--white) !important;
+}
+
+.calendar-container td:not(:first-child):hover:not(.appointed-slot):not(.past-date) {
+    background-color: var(--light-green) !important;
+    cursor: pointer;
+}
+
+.calendar-container td:first-child:hover {
+    background-color: initial !important;
 }
 
 /* Estilos de los slots */
@@ -67,7 +88,7 @@
 }
 
 .past-date {
-    background-color: var(--quinary);
+    background-color: #f5f5f5 !important;  /* Gris claro */
     cursor: not-allowed;
     color: var(--secondary);
 }
