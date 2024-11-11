@@ -109,6 +109,8 @@ a {
 
 .btn {
     border-radius: 20px;
+    border: solid 1px var(--secondary);
+    color: var(--primary);
 }
 
 .btn-tigrevet {
@@ -118,12 +120,17 @@ a {
     font-size: 1.2rem;
     transition: 0.5s;
     margin-bottom: 1em;
+    border: solid 1px var(--primary);
 }
 
 .btn-tigrevet:hover {
     background-color: var(--quinary);
     border: solid 1px var(--secondary);
     color: var(--secondary);
+}
+
+#btn-reservas {
+    margin-bottom: 0;
 }
 
 @media (max-width: 1000px) {
@@ -494,7 +501,7 @@ a {
 
 .form-control {
     border: 2px solid #f8d7da;
-    border-radius: 10px;
+    border-radius: 15px;
     outline: none;
 }
 
@@ -524,8 +531,8 @@ input, textarea {
 }
 
 .img-contact-section img {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px; 
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em; 
     object-fit: cover;
     height: 100%;
     width: 100%;
@@ -671,5 +678,14 @@ input, textarea {
     transform: scale(1.05);
 }
 
+@media (max-width: 784px) {
+    .card-compromiso {
+        width: auto !important;
+        height: auto !important;
+    }
 
-
+    .card-nosotros {
+        width: auto !important;
+        height: auto !important;
+    }
+}

@@ -27,7 +27,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse pe-2 fs-4" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-end">
                         <li class="nav-item ms-2">
                             <a class="nav-link active" href="../pages/servicios.html">Servicios</a>
                         </li>
@@ -45,7 +45,7 @@
                         </li>
                         <li>
                             <a href="../pages/reservas.html">
-                                <button class="btn btn-tigrevet" type="submit">Reservá tu cita</button>
+                                <button id="btn-reservas" class="btn btn-tigrevet" type="submit">Reservá tu cita</button>
                             </a>
                         </li>
                     </ul>
@@ -59,7 +59,7 @@
         <h1 class=" container mt-5">Explorá nuestros servicios</h1>
         <div class="container mt-5">
             <div class="row align-items-center bg-quaternary rounded-4 component-nav">
-                <div class="col text-center card-nav" data-target="cirugia">
+                <div class="col text-center card-nav active" data-target="cirugia">
                     <div class="card card-servicios bg-quaternary d-flex flex-column align-items-center">
                         <img src="../assets/servicios_cirugia.png" alt="Cirugía" class="card-img-top">
                         <p class="bold mt-2">Cirugía</p>
@@ -88,7 +88,7 @@
             <!-- Contenido oculto que se mostrará al hacer clic en cada card -->
             <div class="content mt-5">
                 <!-- Información sobre Cirugía -->
-                <div id="cirugia" class="content-item">
+                <div id="cirugia" class="content-item active">
                     <div class="container row ">
 
                         <!-- columna 1 -->

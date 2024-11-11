@@ -228,6 +228,10 @@
     color: var(--secondary);
 }
 
+.btn{
+    color: var(--white);
+}
+
 input, textarea {
     border-radius: 10px;
     outline: none;
