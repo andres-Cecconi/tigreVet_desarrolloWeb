@@ -15,6 +15,19 @@ function mostrarCalendario() {
     diasGuarderia.classList.toggle("d-none", servicio !== "guarderia");
 }
 
+// Configurar la fecha mínima para los campos de fecha
+const fechaHoy = new Date().toISOString().split("T")[0];
+document.getElementById("fecha-inicio").setAttribute("min", fechaHoy);
+document.getElementById("fecha-fin").setAttribute("min", fechaHoy);
+
+// Función para calcular la cantidad de días entre dos fechas
+function calcularDiasEntreFechas(fechaInicio, fechaFin) {
+    const inicio = new Date(fechaInicio);
+    const fin = new Date(fechaFin);
+    const diferenciaTiempo = fin - inicio;
+    return Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24));
+}
+
 // Función para agregar una mascota con sus datos
 function agregarMascota() {
     const servicio = document.getElementById("servicio").value;
@@ -40,11 +53,36 @@ function agregarMascota() {
 
     // Para guardería, calcular los días seleccionados
     if (servicio === "guarderia") {
-        const fechaInicio = new Date(document.getElementById("fecha-inicio").value);
-        const fechaFin = new Date(document.getElementById("fecha-fin").value);
+        const fechaInicioInput = document.getElementById("fecha-inicio").value;
+        const fechaFinInput = document.getElementById("fecha-fin").value;
         
-        if (!fechaInicio || !fechaFin || fechaFin < fechaInicio) {
+        // Verificar que ambas fechas hayan sido seleccionadas
+        if (!fechaInicioInput || !fechaFinInput) {
             alert("Por favor, selecciona fechas válidas para Guardería.");
+            return;
+        }
+
+        // Crear objetos Date desde las entradas
+        const fechaInicio = new Date(fechaInicioInput);
+        const fechaFin = new Date(fechaFinInput);
+
+        // Obtener fecha de hoy y convertirla a formato "YYYY-MM-DD"
+        const hoy = new Date();
+        const hoyString = hoy.toISOString().split("T")[0];
+        
+        // Convertir fecha de inicio y fin a formato "YYYY-MM-DD"
+        const fechaInicioString = fechaInicio.toISOString().split("T")[0];
+        const fechaFinString = fechaFin.toISOString().split("T")[0];
+
+        // Validar que la fecha de inicio no sea anterior al día presente
+        if (fechaInicioString < hoyString) {
+            alert("La fecha de inicio no puede ser anterior al día presente.");
+            return;
+        }
+
+        // Validar que la fecha de fin no sea anterior a la fecha de inicio
+        if (fechaFinString < fechaInicioString) {
+            alert("La fecha de fin no puede ser anterior a la fecha de inicio.");
             return;
         }
 
@@ -52,8 +90,9 @@ function agregarMascota() {
         dias = (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24) + 1;
     }
 
-    const precioUnitario = precios[servicio][tamano] * dias;
-    const totalPorMascota = precioUnitario * cantidad;
+    // Calcular precio unitario (incluye el cálculo de los días si es guardería)
+    const precioUnitario = precios[servicio][tamano];  // Sin multiplicar por los días aquí
+    const totalPorMascota = precioUnitario * cantidad * dias;  // Ahora multiplicamos por cantidad y días
 
     // Crear un objeto con la información de la mascota
     const mascota = {
@@ -71,7 +110,7 @@ function agregarMascota() {
     if (mascotaExistente) {
         // Si la mascota ya existe, solo se suma la cantidad
         mascotaExistente.cantidad += cantidad;
-        mascotaExistente.totalPorMascota = mascotaExistente.precioUnitario * mascotaExistente.cantidad;
+        mascotaExistente.totalPorMascota = mascotaExistente.precioUnitario * mascotaExistente.cantidad * mascotaExistente.dias;
     } else {
         // Si no existe, se agrega la nueva mascota
         mascotasAgregadas.push(mascota);

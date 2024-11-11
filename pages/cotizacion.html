@@ -32,6 +32,9 @@
                             <a class="nav-link" href="../pages/servicios.html">Servicios</a>
                         </li>
                         <li class="nav-item ms-2">
+                            <a class="nav-link" href="../pages/cotizacion.html">Cotización</a>
+                        </li>
+                        <li class="nav-item ms-2">
                             <a class="nav-link" href="../pages/recursos.html">Recursos</a>
                         </li>
                         <li class="nav-item ms-2">
@@ -67,7 +70,7 @@
                     <option value="guarderia">Guardería</option>
                 </select>
             </div>
-    
+
             <div class="mb-3">
                 <label for="cantidad" class="form-label">Cantidad de mascotas:</label>
                 <input type="number" name="cantidad" id="cantidad" placeholder="Número de mascotas" required min="1">
@@ -84,12 +87,19 @@
             </div>
     
             <!-- Campo de selección de días solo visible para Guardería -->
-            <div class="mb-3 d-none" id="dias-guarderia">
-                <label for="dias" class="form-label">Selecciona los días de estadía:</label>
-                <input type="date" id="fecha-inicio" class="form-control mb-2" placeholder="Fecha de inicio">
-                <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha de fin">
+            <div id="dias-guarderia" class="mb-3 d-none">
+                <label for="fecha-inicio" class="form-label">Fecha de inicio:</label>
+                <input type="date" id="fecha-inicio" class="form-control" min="" required>
+                
+                <label for="fecha-fin" class="form-label mt-2">Fecha de fin:</label>
+                <input type="date" id="fecha-fin" class="form-control" min="" required>
             </div>
     
+            <!-- Nota para el servicio de Cirugía -->
+             <div id="nota-cirugia" class="mt-2 text-danger">
+                <strong>Nota:</strong> Para el servicio de Cirugía, por favor contacta a la veterinaria directamente por los medios de contacto.
+            </div>
+
             <div class="text-center">
                 <button type="button" class="btn btn-tigrevet mt-3" onclick="agregarMascota()">Agregar al presupuesto</button>
             </div>
